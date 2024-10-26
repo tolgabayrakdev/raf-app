@@ -1,12 +1,13 @@
 "use client"
+import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 
 export default function NotFound() {
     const router = useRouter()
     return (
-      <div className="flex h-screen items-center justify-center">
-        <h1 className="text-2xl">404 - Page Not Found</h1>
-        <button className="ml-4" onClick={() => router.back()}>Geri</button>
+      <div className="flex h-screen items-center justify-center flex-col">
+        <h1 className="text-3xl mb-2">Üzgünüz, aradığınız sayfa bulunamadı!</h1>
+        <Button onClick={() => router.back()}>Geri dön</Button>
       </div>
     )
   }
