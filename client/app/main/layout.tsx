@@ -36,7 +36,7 @@ function Header({ email }: { email: string }) {
         <header className="bg-primary text-primary-foreground p-4">
             <div className="container mx-auto flex justify-between items-center">
                 <div className="flex items-center space-x-8">
-                    <h1 className="text-2xl font-bold">Logo</h1>
+                    <h1 className="text-2xl font-bold">Raf.</h1>
                     <nav className="space-x-4">
                         <NavLink href="/main">Main</NavLink>
                         <NavLink href="/main/profile">Profile</NavLink>
