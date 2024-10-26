@@ -58,7 +58,7 @@ export default function SignIn() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen bg-gray-50">
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle>Giriş Yap</CardTitle>
@@ -101,12 +101,12 @@ export default function SignIn() {
           </Form>
         </CardContent>
         <CardFooter className="flex flex-col items-center space-y-2">
-          <Link href="/forgot-password" className="text-sm text-blue-600 hover:underline">
+          <Link href="/forgot-password" className="text-sm text-gray-600 hover:underline">
             Şifremi Unuttum
           </Link>
           <div className="text-sm">
             Hesabınız yok mu?{" "}
-            <Link href="/sign-up" className="text-blue-600 hover:underline">
+            <Link href="/sign-up" className="text-gray-600 hover:underline">
               Hesap Oluştur
             </Link>
           </div>
