@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 
 
 class LoginSchema(BaseModel):
@@ -10,5 +11,5 @@ class RegisterSchema(BaseModel):
     username: str
     email: str
     password: str
-    bio: str = None
-    address: str = None
+    bio: Optional[str] = None
+    address: Optional[str] = None

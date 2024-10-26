@@ -24,6 +24,8 @@ class UserRepository:
 
     def update_user(self, user_id, data):
         user = self.get_user_by_id(user_id)
+        if user is None:
+            raise ValueError(f"User with id {user_id} not found")
         user.username = data.get("username", user.username)
         user.email = data.get("email", user.email)
         user.password = data.get("password", user.password)
