@@ -61,7 +61,7 @@ function Header({ email }: { email: string }) {
     const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-primary text-primary-foreground py-2 px-4 shadow-md">
+        <header className="bg-primary text-primary-foreground py-2 px-4 shadow-md">
             <div className="container mx-auto flex justify-between items-center">
                 <div className="flex items-center space-x-6">
                     <h1 className="text-xl font-bold">Raf.</h1>
@@ -134,10 +134,12 @@ export default function MainLayout({
     children: React.ReactNode
 }) {
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col h-screen">
             <Header email={"tolgabayrak@raf.com"} />
-            <main className="flex-grow container mx-auto py-8 mt-16">
-                {children}
+            <main className="flex-1 overflow-y-auto">
+                <div className="container mx-auto py-8">
+                    {children}
+                </div>
             </main>
             <Footer />
         </div>
