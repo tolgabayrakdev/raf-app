@@ -71,7 +71,7 @@ function Header() {
                     method: "POST",
                     credentials: 'include'
                 })
-                
+
                 if (response.ok) {
                     const data = await response.json()
                     setEmail(data.email)
@@ -95,7 +95,7 @@ function Header() {
             })
 
             if (response.ok) {
-                router.push('/sign-in') 
+                router.push('/sign-in')
             } else {
                 console.error('Çıkış yapılırken bir hata oluştu')
             }
