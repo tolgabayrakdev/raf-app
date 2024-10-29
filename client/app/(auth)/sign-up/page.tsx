@@ -39,7 +39,7 @@ export default function SignUp() {
   const onSubmit = async (values: SignUpValues) => {
     setStatus('Hesap oluşturuluyor...')
     try {
-      const response = await fetch('http://localhost:1234/api/auth/register', {
+      const response = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ export default function SignUp() {
               <Button className="w-full" type="submit">
                 Hesap Oluştur
               </Button>
-              {status && <p className="mt-2 text-sm text-center text-red-500">{status}</p>}
+              {status && <p className="mt-2 text-sm text-center text-gray-600">{status}</p>}
             </form>
           </Form>
         </CardContent>

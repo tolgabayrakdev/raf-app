@@ -33,7 +33,7 @@ export default function SignIn() {
   const onSubmit = async (values: SignInValues) => {
     setStatus('Giriş yapılıyor...')
     try {
-      const response = await fetch('http://localhost:1234/api/auth/login', {
+      const response = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `/api/auth/login`, {
         method: 'POST',
         credentials: "include",
         headers: {
@@ -96,7 +96,7 @@ export default function SignIn() {
               <Button className="w-full" type="submit">
                 Giriş Yap
               </Button>
-              {status && <p className="mt-2 text-sm text-center text-red-500">{status}</p>}
+              {status && <p className="mt-2 text-sm text-center text-gray-600">{status}</p>}
             </form>
           </Form>
         </CardContent>
