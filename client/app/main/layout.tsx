@@ -1,5 +1,4 @@
 "use client"
-
 import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -12,6 +11,9 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { ChevronDown, LogOut, Settings, User, Menu, X } from "lucide-react"
 import { usePathname } from "next/navigation"
+import AuthProvider from "@/providers/auth-provider"
+
+
 
 function NavLink({ href, children: children }: { href: string, children: React.ReactNode }) {
     const pathname = usePathname()
@@ -38,8 +40,8 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen:
         `}>
             <div className="flex flex-col p-4">
                 <div className="flex justify-end">
-                    <Button 
-                        variant="ghost" 
+                    <Button
+                        variant="ghost"
                         size="icon"
                         onClick={() => setIsOpen(false)}
                         className="text-primary-foreground"
@@ -75,8 +77,8 @@ function Header({ email }: { email: string }) {
 
                 <div className="flex items-center space-x-3">
                     {/* Mobile Menu Button */}
-                    <Button 
-                        variant="ghost" 
+                    <Button
+                        variant="ghost"
                         size="icon"
                         className="lg:hidden text-primary-foreground h-8 w-8"
                         onClick={() => setIsOpen(true)}
@@ -134,14 +136,17 @@ export default function MainLayout({
     children: React.ReactNode
 }) {
     return (
-        <div className="flex flex-col h-screen">
-            <Header email={"tolgabayrak@raf.com"} />
-            <main className="flex-1 overflow-y-auto">
-                <div className="container mx-auto py-8">
-                    {children}
-                </div>
-            </main>
-            <Footer />
-        </div>
+        <AuthProvider>
+            <div className="flex flex-col h-screen">
+                <Header email={"tolgabayrak@raf.com"} />
+                <main className="flex-1 overflow-y-auto">
+                    <div className="container mx-auto py-8">
+                        {children}
+                    </div>
+                </main>
+                <Footer />
+            </div>
+        </AuthProvider>
+
     )
 }

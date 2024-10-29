@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
-from ..models import User
+from ..models import User, Role
 
 
 class UserRepository:

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Response, Request, HTTPException
 from sqlalchemy.orm import Session
 
 from ..schema.auth_schema import LoginSchema, RegisterSchema
@@ -22,6 +22,20 @@ async def register(payload: RegisterSchema, db: Session = Depends(get_db)):
     auth_service = AuthService(db)
     return auth_service.register(payload)
 
+
+@router.post("/verify")
+async def verify(request: Request, db: Session = Depends(get_db)):
+    auth_service = AuthService(db)
+    try:
+        access_token = request.cookies.get("access_token")
+        refresh_token = request.cookies.get("refresh_token")
+
+        if not access_token or not refresh_token:
+            raise HTTPException(status_code=401, detail="Unauthorized")
+        
+        return auth_service.verify_user(access_token)        
+    except Exception:
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
 @router.post("/logout")
 async def logout(response: Response):
