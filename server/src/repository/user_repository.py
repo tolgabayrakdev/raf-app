@@ -21,6 +21,17 @@ class UserRepository:
 
     def get_user_by_id(self, user_id):
         return self.db.query(User).filter(User.id == user_id).first()
+    
+    def delete_user(self, user_id):
+        user = self.get_user_by_id(user_id)
+        if user is None:
+            raise ValueError(f"User with id {user_id} not found")
+        try:
+            self.db.delete(user)
+            self.db.commit()
+        except SQLAlchemyError:
+            self.db.rollback()
+            raise
 
     def update_user(self, user_id, data):
         user = self.get_user_by_id(user_id)
