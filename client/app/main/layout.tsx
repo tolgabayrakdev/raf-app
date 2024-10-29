@@ -142,7 +142,7 @@ function Header() {
                                 <Settings className="mr-2 h-4 w-4" />
                                 <span>Ayarlar</span>
                             </DropdownMenuItem>
-                            <DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => router.push('/main/profile')}>
                                 <User className="mr-2 h-4 w-4" />
                                 <span>Profil</span>
                             </DropdownMenuItem>

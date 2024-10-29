@@ -43,27 +43,32 @@ export default function ProfilePage() {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name">Ad Soyad</Label>
-            {isEditing ? (
-              <Input id="name" value={userInfo.name} onChange={handleChange} />
-            ) : (
-              <div className="p-2 bg-gray-100 rounded">{userInfo.name}</div>
-            )}
+            <Input 
+              id="name" 
+              value={userInfo.name} 
+              onChange={handleChange}
+              disabled={!isEditing}
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="email">E-posta</Label>
-            {isEditing ? (
-              <Input id="email" type="email" value={userInfo.email} onChange={handleChange} />
-            ) : (
-              <div className="p-2 bg-gray-100 rounded">{userInfo.email}</div>
-            )}
+            <Input 
+              id="email" 
+              type="email" 
+              value={userInfo.email} 
+              onChange={handleChange}
+              disabled={!isEditing}
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="phone">Telefon</Label>
-            {isEditing ? (
-              <Input id="phone" type="tel" value={userInfo.phone} onChange={handleChange} />
-            ) : (
-              <div className="p-2 bg-gray-100 rounded">{userInfo.phone}</div>
-            )}
+            <Input 
+              id="phone" 
+              type="tel" 
+              value={userInfo.phone} 
+              onChange={handleChange}
+              disabled={!isEditing}
+            />
           </div>
         </CardContent>
         <CardFooter>
