@@ -44,7 +44,7 @@ export default function SignIn() {
 
       if (response.ok) {
         setStatus('Giriş başarılı! Yönlendiriliyorsunuz...')
-        router.push("/feed")
+        router.push("/main")
       } else if (response.status === 400) {
         setStatus('E-posta veya parola hatalı. Lütfen bilgilerinizi kontrol edin.')
       } else {

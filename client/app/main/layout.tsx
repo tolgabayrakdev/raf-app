@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
@@ -10,7 +10,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ChevronDown, LogOut, Settings, User, Menu, X } from "lucide-react"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import AuthProvider from "@/providers/auth-provider"
 
 
@@ -59,8 +59,50 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen:
     )
 }
 
-function Header({ email }: { email: string }) {
+function Header() {
+    const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
+    const [email, setEmail] = useState<string>('Yükleniyor...')
+
+    useEffect(() => {
+        const verifyUser = async () => {
+            try {
+                const response = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `/api/auth/verify`, {
+                    method: "POST",
+                    credentials: 'include'
+                })
+                
+                if (response.ok) {
+                    const data = await response.json()
+                    setEmail(data.email)
+                } else {
+                    router.push('/sign-in')
+                }
+            } catch (error) {
+                console.error('Doğrulama hatası:', error)
+                router.push('/sign-in')
+            }
+        }
+
+        verifyUser()
+    }, [router])
+
+    const handleLogout = async () => {
+        try {
+            const response = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `/api/auth/logout`, {
+                method: 'POST',
+                credentials: 'include'
+            })
+
+            if (response.ok) {
+                router.push('/sign-in') 
+            } else {
+                console.error('Çıkış yapılırken bir hata oluştu')
+            }
+        } catch (error) {
+            console.error('Çıkış yapılırken bir hata oluştu:', error)
+        }
+    }
 
     return (
         <header className="bg-primary text-primary-foreground py-2 px-4 shadow-md">
@@ -105,7 +147,7 @@ function Header({ email }: { email: string }) {
                                 <span>Profil</span>
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>
+                            <DropdownMenuItem onClick={handleLogout}>
                                 <LogOut className="mr-2 h-4 w-4" />
                                 <span>Çıkış Yap</span>
                             </DropdownMenuItem>
@@ -138,7 +180,7 @@ export default function MainLayout({
     return (
         <AuthProvider>
             <div className="flex flex-col h-screen">
-                <Header email={"tolgabayrak@raf.com"} />
+                <Header />
                 <main className="flex-1 overflow-y-auto">
                     <div className="container mx-auto py-8">
                         {children}
