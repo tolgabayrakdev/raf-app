@@ -46,12 +46,16 @@ function NavLink({ href, children, subLinks }: { href: string; children: React.R
   )
 }
 
-function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (isOpen: boolean) => void }) {
+function MobileNav({ isOpen, setIsOpen, closeMobileMenu }: { isOpen: boolean; setIsOpen: (isOpen: boolean) => void; closeMobileMenu: () => void }) {
   const pathname = usePathname()
   const [isExploreOpen, setIsExploreOpen] = useState(false)
 
   const linkStyle = "block w-full text-primary-foreground hover:text-primary-foreground/80 font-medium px-2 py-1.5 rounded-md bg-primary-foreground/10 text-sm relative group"
   const activeLinkStyle = "after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary-foreground"
+
+  useEffect(() => {
+    closeMobileMenu()
+  }, [pathname])
 
   return (
     <div className={`
@@ -116,6 +120,9 @@ function Header() {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const [email, setEmail] = useState<string>('Yükleniyor...')
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const closeMobileMenu = () => setIsMobileMenuOpen(false)
 
   useEffect(() => {
     const verifyUser = async () => {
@@ -182,7 +189,7 @@ function Header() {
             variant="ghost"
             size="icon"
             className="lg:hidden text-primary-foreground h-8 w-8"
-            onClick={() => setIsOpen(true)}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <Menu className="h-5 w-5" />
           </Button>
@@ -216,7 +223,7 @@ function Header() {
       </div>
 
       {/* Mobile Navigation */}
-      <MobileNav isOpen={isOpen} setIsOpen={setIsOpen} />
+      <MobileNav isOpen={isMobileMenuOpen} setIsOpen={setIsMobileMenuOpen} closeMobileMenu={closeMobileMenu} />
     </header>
   )
 }
