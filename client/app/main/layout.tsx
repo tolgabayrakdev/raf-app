@@ -118,7 +118,6 @@ function MobileNav({ isOpen, setIsOpen, closeMobileMenu }: { isOpen: boolean; se
 
 function Header() {
   const router = useRouter()
-  const [isOpen, setIsOpen] = useState(false)
   const [email, setEmail] = useState<string>('Yükleniyor...')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -179,7 +178,7 @@ function Header() {
           <nav className="hidden lg:flex space-x-3">
             <NavLink href="/main">Ana Sayfa</NavLink>
             <NavLink href="/main/profile">Profil</NavLink>
-            <NavLink href="/explore" subLinks={exploreSubLinks}>Keşfet</NavLink>
+            <NavLink href="/explore" subLinks={exploreSubLinks}>Arşiv</NavLink>
           </nav>
         </div>
 
@@ -230,7 +229,7 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="bg-gray-100 text-gray-600 py-4 text-center text-sm">
+    <footer className="bg-gray-100 text-gray-600 py-2 text-center text-sm">
       <div className="container mx-auto">
         <p>&copy; 2024 @Raf. Tüm hakları saklıdır.</p>
       </div>
