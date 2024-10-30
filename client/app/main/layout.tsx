@@ -91,8 +91,8 @@ function MobileNav({ isOpen, setIsOpen, closeMobileMenu }: { isOpen: boolean; se
           {isExploreOpen && (
             <div className="mt-2 space-y-2">
               <Link
-                href="/explore/trending"
-                className={`${linkStyle} ${pathname === '/explore/trending' ? activeLinkStyle : ''}`}
+                href="/archive/user-archive"
+                className={`${linkStyle} ${pathname === '/archive/user-archive' ? activeLinkStyle : ''}`}
               >
                 Gündem Keşfet
               </Link>
@@ -164,7 +164,7 @@ function Header() {
   }
 
   const exploreSubLinks = [
-    { href: '/explore/trending', label: 'Gündem Keşfet' },
+    { href: '/main/archive/user-archive', label: 'Kişi Arşivi' },
     { href: '/explore/people', label: 'İnsanları Keşfet' },
     { href: '/explore/topics', label: 'Konuları Keşfet' },
   ]
