@@ -1,11 +1,13 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
-from ..models import User, Role
+from ..models import User
+from ..util.helper import Helper
 
 
 class UserRepository:
     def __init__(self, db: Session):
         self.db = db
+        self.helper = Helper()
 
     def create_user(self, user):
         try:
@@ -42,6 +44,19 @@ class UserRepository:
         user.password = data.get("password", user.password)
         user.bio = data.get("bio", user.bio)
         user.address = data.get("address", user.address)
+        try:
+            self.db.commit()
+            self.db.refresh(user)
+        except SQLAlchemyError:
+            self.db.rollback()
+            raise
+
+    def update_user_password(self, user_id: int, new_password: str):
+        user = self.get_user_by_id(user_id)
+        if user is None:
+            raise ValueError(f"User with id {user_id} not found")
+        
+        user.password = new_password
         try:
             self.db.commit()
             self.db.refresh(user)

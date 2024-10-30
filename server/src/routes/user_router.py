@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from ..database import get_db
 from ..service.user_service import UserService
 from ..security.authenticated_user import authenticated_user
+from ..schema.user_schema import PasswordChangeSchema
 
 router = APIRouter()
 
@@ -30,7 +31,7 @@ def delete_profile(
 
 @router.post("/change-password")
 def change_password(
-    payload: dict,
+    payload: PasswordChangeSchema,
     current_user: dict = Depends(authenticated_user),
     db: Session = Depends(get_db),
 ):

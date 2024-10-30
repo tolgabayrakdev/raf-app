@@ -3,6 +3,7 @@ from ..util.helper import Helper
 from fastapi import HTTPException
 from sqlalchemy.exc import SQLAlchemyError
 from ..repository.user_repository import UserRepository
+from ..schema.user_schema import PasswordChangeSchema
 
 class UserService:
 
@@ -40,11 +41,12 @@ class UserService:
     
     def change_password(self, user_id, data):
         user = self.user_repository.get_user_by_id(user_id)
-        if user and self.helper.match_hash_text(user.password, data.current_password):
+        if user is None:
+            raise ValueError(f"User with id {user_id} not found")
+        if self.helper.match_hash_text(user.password, data.current_password):
             user.password = self.helper.generate_hash_password(data.new_password)
         try:
-            self.user_repository.update_user(user_id, data)
+            self.user_repository.update_user_password(user_id, user.password)
             return {"message": "Password updated successfully"}
         except SQLAlchemyError as e:
             raise HTTPException(status_code=500, detail=str(e))
-    
