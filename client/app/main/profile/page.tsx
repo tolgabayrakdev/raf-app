@@ -123,8 +123,8 @@ export default function ProfilePage() {
         },
         credentials: "include",
         body: JSON.stringify({
-          currentPassword: passwords.currentPassword,
-          newPassword: passwords.newPassword,
+          current_password: passwords.currentPassword,
+          new_password: passwords.newPassword,
         })
       });
 
