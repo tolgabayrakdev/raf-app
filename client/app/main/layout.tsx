@@ -50,8 +50,8 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (isOpen:
   const pathname = usePathname()
   const [isExploreOpen, setIsExploreOpen] = useState(false)
 
-  const linkStyle = "block w-full text-primary-foreground hover:text-primary-foreground/80 font-medium px-2 py-1.5 rounded-md bg-primary-foreground/10 text-sm"
-  const activeLinkStyle = "bg-primary-foreground/20"
+  const linkStyle = "block w-full text-primary-foreground hover:text-primary-foreground/80 font-medium px-2 py-1.5 rounded-md bg-primary-foreground/10 text-sm relative group"
+  const activeLinkStyle = "after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary-foreground"
 
   return (
     <div className={`
@@ -77,37 +77,35 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (isOpen:
           <Link href="/main/profile" className={`${linkStyle} ${pathname === '/main/profile' ? activeLinkStyle : ''}`}>
             Profile
           </Link>
-          <div>
-            <button
-              onClick={() => setIsExploreOpen(!isExploreOpen)}
-              className={`${linkStyle} w-full text-left flex justify-between items-center`}
-            >
-              Explore
-              <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isExploreOpen ? 'rotate-180' : ''}`} />
-            </button>
-            {isExploreOpen && (
-              <div className="mt-2 space-y-2">
-                <Link
-                  href="/explore/trending"
-                  className={`${linkStyle} ${pathname === '/explore/trending' ? activeLinkStyle : ''}`}
-                >
-                  Trending Explorer
-                </Link>
-                <Link
-                  href="/explore/people"
-                  className={`${linkStyle} ${pathname === '/explore/people' ? activeLinkStyle : ''}`}
-                >
-                  People Explorer
-                </Link>
-                <Link
-                  href="/explore/topics"
-                  className={`${linkStyle} ${pathname === '/explore/topics' ? activeLinkStyle : ''}`}
-                >
-                  Topics Explorer
-                </Link>
-              </div>
-            )}
-          </div>
+          <button
+            onClick={() => setIsExploreOpen(!isExploreOpen)}
+            className={`${linkStyle} w-full text-left flex justify-between items-center ${pathname.startsWith('/explore') ? activeLinkStyle : ''}`}
+          >
+            Explore
+            <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isExploreOpen ? 'rotate-180' : ''}`} />
+          </button>
+          {isExploreOpen && (
+            <div className="mt-2 space-y-2">
+              <Link
+                href="/explore/trending"
+                className={`${linkStyle} ${pathname === '/explore/trending' ? activeLinkStyle : ''}`}
+              >
+                Trending Explorer
+              </Link>
+              <Link
+                href="/explore/people"
+                className={`${linkStyle} ${pathname === '/explore/people' ? activeLinkStyle : ''}`}
+              >
+                People Explorer
+              </Link>
+              <Link
+                href="/explore/topics"
+                className={`${linkStyle} ${pathname === '/explore/topics' ? activeLinkStyle : ''}`}
+              >
+                Topics Explorer
+              </Link>
+            </div>
+          )}
         </nav>
       </div>
     </div>
