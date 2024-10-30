@@ -76,16 +76,16 @@ function MobileNav({ isOpen, setIsOpen, closeMobileMenu }: { isOpen: boolean; se
         </div>
         <nav className="flex flex-col space-y-2 mt-8">
           <Link href="/main" className={`${linkStyle} ${pathname === '/main' ? activeLinkStyle : ''}`}>
-            Main
+            Ana Sayfa
           </Link>
           <Link href="/main/profile" className={`${linkStyle} ${pathname === '/main/profile' ? activeLinkStyle : ''}`}>
-            Profile
+            Profil
           </Link>
           <button
             onClick={() => setIsExploreOpen(!isExploreOpen)}
             className={`${linkStyle} w-full text-left flex justify-between items-center ${pathname.startsWith('/explore') ? activeLinkStyle : ''}`}
           >
-            Explore
+            Keşfet
             <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isExploreOpen ? 'rotate-180' : ''}`} />
           </button>
           {isExploreOpen && (
@@ -94,19 +94,19 @@ function MobileNav({ isOpen, setIsOpen, closeMobileMenu }: { isOpen: boolean; se
                 href="/explore/trending"
                 className={`${linkStyle} ${pathname === '/explore/trending' ? activeLinkStyle : ''}`}
               >
-                Trending Explorer
+                Gündem Keşfet
               </Link>
               <Link
                 href="/explore/people"
                 className={`${linkStyle} ${pathname === '/explore/people' ? activeLinkStyle : ''}`}
               >
-                People Explorer
+                İnsanları Keşfet
               </Link>
               <Link
                 href="/explore/topics"
                 className={`${linkStyle} ${pathname === '/explore/topics' ? activeLinkStyle : ''}`}
               >
-                Topics Explorer
+                Konuları Keşfet
               </Link>
             </div>
           )}
@@ -165,9 +165,9 @@ function Header() {
   }
 
   const exploreSubLinks = [
-    { href: '/explore/trending', label: 'Trending Explorer' },
-    { href: '/explore/people', label: 'People Explorer' },
-    { href: '/explore/topics', label: 'Topics Explorer' },
+    { href: '/explore/trending', label: 'Gündem Keşfet' },
+    { href: '/explore/people', label: 'İnsanları Keşfet' },
+    { href: '/explore/topics', label: 'Konuları Keşfet' },
   ]
 
   return (
@@ -177,9 +177,9 @@ function Header() {
           <h1 className="text-xl font-bold">Raf.</h1>
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-3">
-            <NavLink href="/main">Main</NavLink>
-            <NavLink href="/main/profile">Profile</NavLink>
-            <NavLink href="/explore" subLinks={exploreSubLinks}>Explore</NavLink>
+            <NavLink href="/main">Ana Sayfa</NavLink>
+            <NavLink href="/main/profile">Profil</NavLink>
+            <NavLink href="/explore" subLinks={exploreSubLinks}>Keşfet</NavLink>
           </nav>
         </div>
 
